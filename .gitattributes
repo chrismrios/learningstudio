@@ -1,0 +1,10 @@
+# Normalize line endings: check in as LF, let Git handle working-copy conversion.
+* text=auto eol=lf
+
+# Binary assets — never touch line endings
+*.glb binary
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff binary
+*.woff2 binary
