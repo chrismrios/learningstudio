@@ -50,7 +50,9 @@ export function mountPaint(host, ctx) {
     <div class="pbn-wrap" id="pbn-wrap">
       <div class="pbn-top" id="pbn-top" style="display:none">
         <span class="hud-pill" id="pbn-prog">0%</span>
-        <span class="hud-pill" id="pbn-hint">Pick a color, tap the glowing blocks!</span>
+        <span class="hud-pill" id="pbn-hint">Drag across the glowing blocks!</span>
+        <button class="btn small ghost" id="pbn-save">💾 Save</button>
+        <button class="btn small ghost" id="pbn-fs">⤢</button>
         <button class="btn small ghost" id="pbn-new">↺ New</button>
       </div>
       <div class="pbn-stage" id="pbn-stage"></div>
@@ -60,8 +62,16 @@ export function mountPaint(host, ctx) {
   host.appendChild(card);
   const stage = card.querySelector("#pbn-stage");
   const palEl = card.querySelector("#pbn-pal");
+  const wrap = card.querySelector("#pbn-wrap");
   const $ = s => card.querySelector(s);
   $("#pbn-new").onclick = () => startMenu();
+  $("#pbn-fs").onclick = () => {
+    const on = wrap.classList.toggle("big");
+    document.body.style.overflow = on ? "hidden" : "";
+    $("#pbn-fs").textContent = on ? "✕" : "⤢";
+    if (game && canvas) { sizeCanvas(); drawGrid(); }
+  };
+  $("#pbn-save").onclick = () => saveCurrent();
 
   /* ---------- source safety ---------- */
   const BLOCKED = /\b(gun|shoot|blood|kill|dead|death|knife|sword|weapon|war|bomb|fight|scary|horror|creepy|ghost|zombie|demon|naked|nude|kiss|sexy|drug|beer|wine|cigarette|hate|stupid)\b/i;
@@ -164,20 +174,31 @@ export function mountPaint(host, ctx) {
     }
     if (disposed) { stopCamera(); return; }
     stage.innerHTML = "";
-    video = el(`<video autoplay playsinline muted class="pbn-video"></video>`);
-    video.srcObject = camStream;
+    video = el(`<video playsinline muted autoplay class="pbn-video"></video>`);
+    video.setAttribute("playsinline", "");       // iOS needs the attribute present
+    video.setAttribute("webkit-playsinline", "");
+    video.muted = true;
     const shot = el(`<div class="pbn-cam-ui">
-      <button class="btn green" id="pbn-snap">📸 Snap!</button>
+      <button class="btn green" id="pbn-snap" disabled>📸 Snap!</button>
       <button class="btn ghost small" id="pbn-cancel">✕ Back</button>
     </div>`);
     const holder = el(`<div class="pbn-cam-holder"></div>`);
     holder.append(video, shot);
     stage.appendChild(holder);
-    shot.querySelector("#pbn-snap").onclick = () => {
+    const snapBtn = shot.querySelector("#pbn-snap");
+    // attach stream AFTER it's in the DOM, then force playback (autoplay is often blocked)
+    video.srcObject = camStream;
+    video.onloadedmetadata = () => { video.play().catch(() => {}); };
+    video.oncanplay = () => { snapBtn.disabled = false; snapBtn.textContent = "📸 Snap!"; };
+    video.play().catch(() => {});
+    setTimeout(() => { if (video && video.readyState >= 2) snapBtn.disabled = false; }, 1200);
+    snapBtn.onclick = () => {
+      const vw = video.videoWidth, vh = video.videoHeight;
+      if (!vw || !vh) { toast("Camera's still warming up — try again in a sec!"); return; }
       const size = 320;
       const cv = document.createElement("canvas");
       cv.width = cv.height = size;
-      const vw = video.videoWidth, vh = video.videoHeight, m = Math.min(vw, vh);
+      const m = Math.min(vw, vh);
       cv.getContext("2d").drawImage(video, (vw - m) / 2, (vh - m) / 2, m, m, 0, 0, size, size);
       stopCamera();
       const img = new Image();
@@ -276,7 +297,13 @@ export function mountPaint(host, ctx) {
     drawGrid();
     renderPalette();
     updateProgress();
-    canvas.addEventListener("pointerdown", onTap);
+    // finger paint: press and drag across matching blocks to fill them
+    let painting = false;
+    canvas.addEventListener("pointerdown", e => { painting = true; canvas.setPointerCapture(e.pointerId); paintAt(e); });
+    canvas.addEventListener("pointermove", e => { if (painting) paintAt(e); });
+    const stop = () => painting = false;
+    canvas.addEventListener("pointerup", stop);
+    canvas.addEventListener("pointercancel", stop);
     let ro = new ResizeObserver(() => { sizeCanvas(); drawGrid(); });
     ro.observe(stage);
     game._ro = ro;
@@ -318,14 +345,17 @@ export function mountPaint(host, ctx) {
       }
     }
   }
-  function onTap(e) {
+  let lastPainted = -1;
+  function paintAt(e) {
     const r = canvas.getBoundingClientRect();
     const x = Math.floor((e.clientX - r.left) / cellPx);
     const y = Math.floor((e.clientY - r.top) / cellPx);
     if (x < 0 || y < 0 || x >= game.gw || y >= game.gh) return;
     const i = y * game.gw + x;
+    if (i === lastPainted) return;
+    lastPainted = i;
     if (game.filled[i]) return;
-    if (game.cellColor[i] !== game.active) { sfx.nope(); flashCell(i); return; }
+    if (game.cellColor[i] !== game.active) return; // dragging over wrong cells is silently ignored
     fillCell(i);
   }
   function fillCell(i) {
@@ -381,6 +411,29 @@ export function mountPaint(host, ctx) {
     const pct = Math.round(game.done / game.total * 100);
     $("#pbn-prog").textContent = pct + "%";
   }
+  // save the picture as it looks right now (filled blocks in color, blanks white)
+  function makePng(size = 480) {
+    const cv = document.createElement("canvas");
+    cv.width = size; cv.height = Math.round(size * game.gh / game.gw);
+    const g = cv.getContext("2d");
+    g.imageSmoothingEnabled = false;
+    const cw = cv.width / game.gw, ch = cv.height / game.gh;
+    for (let i = 0; i < game.total; i++) {
+      const x = i % game.gw, y = Math.floor(i / game.gw);
+      g.fillStyle = game.filled[i] ? hex(game.palette[game.cellColor[i]]) : "#ffffff";
+      g.fillRect(Math.floor(x * cw), Math.floor(y * ch), Math.ceil(cw), Math.ceil(ch));
+    }
+    return cv.toDataURL("image/png");
+  }
+  function saveCurrent() {
+    if (!game) return;
+    const a = document.createElement("a");
+    a.href = makePng();
+    a.download = `my-painting-${Date.now()}.png`;
+    document.body.appendChild(a); a.click(); a.remove();
+    sfx.color();
+    toast("💾 Saved to your device!", "green");
+  }
   function finish() {
     confetti(90); sfx.win();
     speak("You finished your masterpiece! Beautiful!");
@@ -408,6 +461,7 @@ export function mountPaint(host, ctx) {
         <div style="font:900 24px var(--head);color:var(--ink)">🖼️ ${game.title}</div>
         <img src="${store.gallery[0]}" class="pbn-finished" alt="finished painting">
         <div class="row" style="justify-content:center">
+          <button class="btn" id="pbn-savefin">💾 Save picture</button>
           <button class="btn green" id="pbn-again">🎨 Paint another</button>
         </div>
       </div>`);
@@ -415,6 +469,13 @@ export function mountPaint(host, ctx) {
       palEl.style.display = "none";
       stage.innerHTML = "";
       stage.appendChild(done);
+      done.querySelector("#pbn-savefin").onclick = () => {
+        const a = document.createElement("a");
+        a.href = store.gallery[0];
+        a.download = `my-painting-${Date.now()}.png`;
+        document.body.appendChild(a); a.click(); a.remove();
+        toast("💾 Saved to your device!", "green");
+      };
       done.querySelector("#pbn-again").onclick = () => startMenu();
     }, 1400);
   }
