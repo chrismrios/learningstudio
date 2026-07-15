@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#EDEAE2;font-family:'DM Sans',system-ui,sans-serif}
+a{color:#2A6F6A;text-decoration:none}a:hover{color:#1E5450}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.08);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 13px/1.2 system-ui,sans-serif;color:#1a1a1a}
+.dv-opts{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 system-ui,sans-serif;color:rgba(0,0,0,.55)}
+.dv-card{max-width:100%;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}
+.dv-opt:target .dv-oid{background:#2a78d6;color:#fff}
+.dv-next{margin:22px 0 0;font:12px/1.5 system-ui,sans-serif;color:rgba(0,0,0,.5)}
+@keyframes ks-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes ks-glow{0%,100%{box-shadow:0 0 24px rgba(94,234,212,.45),0 0 0 6px rgba(94,234,212,.10)}50%{box-shadow:0 0 40px rgba(94,234,212,.7),0 0 0 10px rgba(94,234,212,.16)}}
+@keyframes ks-twinkle{0%,100%{opacity:.25}50%{opacity:.9}}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Home hub — 4 navigation directions · futuristic-playful × calm-Montessori · Nunito + DM Sans · no mascot</span></div>
+<div style="max-width:760px;margin:0 0 24px;font:13px/1.6 'DM Sans',sans-serif;color:rgba(0,0,0,.6);background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;padding:14px 18px">
+<strong style="color:#1a1a1a">Assumptions:</strong> desktop-first (1200px canvas), child "Mia", age 7, Level 4. Shared system across all four: warm paper neutrals + one dark "glow" surface, four accents (teal · coral · lavender · amber, matched lightness), Nunito 800 for headings, DM Sans for UI, ≥64px tap targets, progress never shown as red/failure. The options vary <em>navigation metaphor</em>: shelf grid, orbit map, learning path, continue-first dock.
+</div>
+<div class="dv-opts">
+
+<!-- ══════════════ 1a SHELF GRID ══════════════ -->
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Shelf Grid — calm Montessori, zones as tidy shelves</div>
+<div class="dv-card" style="width:980px;background:#F6F3EC">
+<div style="padding:28px 36px 36px;display:flex;flex-direction:column;gap:26px">
+  <div style="display:flex;align-items:center;justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#B7E4DC,#5FB8AA);display:flex;align-items:center;justify-content:center;font:800 22px Nunito,sans-serif;color:#fff;box-shadow:0 2px 0 #C9B08C">M</div>
+      <div>
+        <div style="font:800 24px/1.1 Nunito,sans-serif;color:#2B2A26">Good morning, Mia</div>
+        <div style="font:500 13px 'DM Sans',sans-serif;color:#8A857A">What do you want to explore today?</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #E4DDCE;border-radius:999px;padding:8px 16px">
+        <span style="font:800 14px Nunito,sans-serif;color:#2B2A26">Level 4</span>
+        <span style="width:110px;height:8px;border-radius:99px;background:#EAE3D4;overflow:hidden;display:inline-block"><span style="display:block;width:62%;height:100%;border-radius:99px;background:linear-gradient(90deg,#5FB8AA,#8ED7C6)"></span></span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #E4DDCE;border-radius:999px;padding:8px 14px;font:800 14px Nunito,sans-serif;color:#C98A2D"><span style="display:inline-block;width:14px;height:14px;background:#FFD166;border-radius:3px;transform:rotate(45deg)"></span>1,240</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+    <div style="background:#E4F2EE;border-radius:20px;padding:22px 22px 18px;display:flex;flex-direction:column;gap:12px;border-bottom:4px solid #BBDDD3;cursor:pointer" style-hover="transform:translateY(-3px)">
+      <div style="font:900 40px/1 Nunito,sans-serif;color:#3E8E80">Aa</div>
+      <div style="font:800 18px Nunito,sans-serif;color:#2B2A26">Word Workshop</div>
+      <div style="font:500 12px 'DM Sans',sans-serif;color:#7A8B84">Type, hear, and collect words</div>
+      <div style="display:flex;gap:5px;margin-top:2px"><span style="width:10px;height:10px;border-radius:50%;background:#3E8E80"></span><span style="width:10px;height:10px;border-radius:50%;background:#3E8E80"></span><span style="width:10px;height:10px;border-radius:50%;background:#3E8E80"></span><span style="width:10px;height:10px;border-radius:50%;background:#C7DED6"></span><span style="width:10px;height:10px;border-radius:50%;background:#C7DED6"></span></div>
+    </div>
+    <div style="background:#FDEBE0;border-radius:20px;padding:22px 22px 18px;display:flex;flex-direction:column;gap:12px;border-bottom:4px solid #F2CDB8;cursor:pointer" style-hover="transform:translateY(-3px)">
+      <div style="display:grid;grid-template-columns:repeat(3,14px);gap:4px;height:40px;align-content:center"><span style="width:14px;height:14px;background:#E8845E;border-radius:4px"></span><span style="width:14px;height:14px;background:#F2CDB8;border-radius:4px"></span><span style="width:14px;height:14px;background:#E8845E;border-radius:4px"></span><span style="width:14px;height:14px;background:#F2CDB8;border-radius:4px"></span><span style="width:14px;height:14px;background:#E8845E;border-radius:4px"></span><span style="width:14px;height:14px;background:#F2CDB8;border-radius:4px"></span></div>
+      <div style="font:800 18px Nunito,sans-serif;color:#2B2A26">Word Search</div>
+      <div style="font:500 12px 'DM Sans',sans-serif;color:#9A8378">Find hidden words in the grid</div>
+      <div style="display:flex;gap:5px;margin-top:2px"><span style="width:10px;height:10px;border-radius:50%;background:#E8845E"></span><span style="width:10px;height:10px;border-radius:50%;background:#E8845E"></span><span style="width:10px;height:10px;border-radius:50%;background:#EEDACD"></span><span style="width:10px;height:10px;border-radius:50%;background:#EEDACD"></span><span style="width:10px;height:10px;border-radius:50%;background:#EEDACD"></span></div>
+    </div>
+    <div style="background:#EBE7F8;border-radius:20px;padding:22px 22px 18px;display:flex;flex-direction:column;gap:12px;border-bottom:4px solid #D3CBEE;cursor:pointer" style-hover="transform:translateY(-3px)">
+      <div style="display:flex;gap:4px;height:40px;align-items:center"><span style="width:26px;height:26px;background:#8B75D6;border-radius:6px;display:flex;align-items:center;justify-content:center;font:800 13px Nunito,sans-serif;color:#fff">A</span><span style="width:26px;height:26px;background:#A794E2;border-radius:6px;display:flex;align-items:center;justify-content:center;font:800 13px Nunito,sans-serif;color:#fff">S</span><span style="width:26px;height:26px;background:#C3B6EC;border-radius:6px;display:flex;align-items:center;justify-content:center;font:800 13px Nunito,sans-serif;color:#fff">D</span><span style="width:26px;height:26px;background:#D9D0F3;border-radius:6px;display:flex;align-items:center;justify-content:center;font:800 13px Nunito,sans-serif;color:#8B75D6">F</span></div>
+      <div style="font:800 18px Nunito,sans-serif;color:#2B2A26">Typing Academy</div>
+      <div style="font:500 12px 'DM Sans',sans-serif;color:#87819B">Fast fingers, happy keys</div>
+      <div style="display:flex;gap:5px;margin-top:2px"><span style="width:10px;height:10px;border-radius:50%;background:#8B75D6"></span><span style="width:10px;height:10px;border-radius:50%;background:#DCD5F0"></span><span style="width:10px;height:10px;border-radius:50%;background:#DCD5F0"></span><span style="width:10px;height:10px;border-radius:50%;background:#DCD5F0"></span><span style="width:10px;height:10px;border-radius:50%;background:#DCD5F0"></span></div>
+    </div>
+    <div style="background:#FCF3DC;border-radius:20px;padding:22px 22px 18px;display:flex;flex-direction:column;gap:12px;border-bottom:4px solid #EFDDAE;cursor:pointer" style-hover="transform:translateY(-3px)">
+      <div style="font:900 34px/40px Nunito,sans-serif;color:#C98A2D;letter-spacing:2px">+−×÷</div>
+      <div style="font:800 18px Nunito,sans-serif;color:#2B2A26">Math Lab</div>
+      <div style="font:500 12px 'DM Sans',sans-serif;color:#9C8E6C">Play with numbers and see how they work</div>
+      <div style="display:flex;gap:5px;margin-top:2px"><span style="width:10px;height:10px;border-radius:50%;background:#C98A2D"></span><span style="width:10px;height:10px;border-radius:50%;background:#C98A2D"></span><span style="width:10px;height:10px;border-radius:50%;background:#C98A2D"></span><span style="width:10px;height:10px;border-radius:50%;background:#C98A2D"></span><span style="width:10px;height:10px;border-radius:50%;background:#EFE4C4"></span></div>
+    </div>
+    <div style="background:#E2EEF7;border-radius:20px;padding:22px 22px 18px;display:flex;flex-direction:column;gap:12px;border-bottom:4px solid #C2DAEC;cursor:pointer" style-hover="transform:translateY(-3px)">
+      <div style="display:grid;grid-template-columns:repeat(4,13px);gap:3px;height:40px;align-content:center"><span style="width:13px;height:13px;background:#4F8FC7;border-radius:3px"></span><span style="width:13px;height:13px;background:#4F8FC7;border-radius:3px"></span><span style="width:13px;height:13px;background:#4F8FC7;border-radius:3px"></span><span style="width:13px;height:13px;background:#4F8FC7;border-radius:3px"></span><span style="width:13px;height:13px;background:#79ABD8;border-radius:3px"></span><span style="width:13px;height:13px;background:#79ABD8;border-radius:3px"></span><span style="width:13px;height:13px;background:#79ABD8;border-radius:3px"></span><span style="width:13px;height:13px;background:#79ABD8;border-radius:3px"></span><span style="width:13px;height:13px;background:#A9CBE8;border-radius:3px"></span><span style="width:13px;height:13px;background:#A9CBE8;border-radius:3px"></span><span style="width:13px;height:13px;background:#A9CBE8;border-radius:3px"></span><span style="width:13px;height:13px;background:#A9CBE8;border-radius:3px"></span></div>
+      <div style="font:800 18px Nunito,sans-serif;color:#2B2A26">Multiplication World</div>
+      <div style="font:500 12px 'DM Sans',sans-serif;color:#7B8B99">Rows × columns — see it, build it</div>
+      <div style="display:flex;gap:5px;margin-top:2px"><span style="width:10px;height:10px;border-radius:50%;background:#4F8FC7"></span><span style="width:10px;height:10px;border-radius:50%;background:#4F8FC7"></span><span style="width:10px;height:10px;border-radius:50%;background:#CCDEED"></span><span style="width:10px;height:10px;border-radius:50%;background:#CCDEED"></span><span style="width:10px;height:10px;border-radius:50%;background:#CCDEED"></span></div>
+    </div>
+    <div style="background:#fff;border:2px dashed #DCD4C2;border-radius:20px;padding:22px 22px 18px;display:flex;flex-direction:column;gap:12px;cursor:pointer" style-hover="transform:translateY(-3px)">
+      <div style="display:flex;gap:8px;height:40px;align-items:center"><span style="width:28px;height:28px;border-radius:50%;background:#FFD166;box-shadow:0 2px 0 #E3B84E"></span><span style="width:28px;height:28px;border-radius:50%;background:#8ED7C6;box-shadow:0 2px 0 #6FB8A6"></span><span style="width:28px;height:28px;border-radius:50%;background:#F2A98C;box-shadow:0 2px 0 #D68A6C"></span></div>
+      <div style="font:800 18px Nunito,sans-serif;color:#2B2A26">My Badges</div>
+      <div style="font:500 12px 'DM Sans',sans-serif;color:#8A857A">12 collected · 3 almost there</div>
+      <div style="font:700 12px 'DM Sans',sans-serif;color:#3E8E80;margin-top:2px">Open the collection →</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ══════════════ 1b ORBIT LAB ══════════════ -->
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Orbit Lab — glowy space map, zones as planets around you</div>
+<div class="dv-card" style="width:980px;background:#0F1526">
+<div style="position:relative;height:660px;overflow:hidden">
+  <span style="position:absolute;left:8%;top:12%;width:3px;height:3px;border-radius:50%;background:#fff;animation:ks-twinkle 3s infinite"></span>
+  <span style="position:absolute;left:22%;top:28%;width:2px;height:2px;border-radius:50%;background:#fff;animation:ks-twinkle 4s .5s infinite"></span>
+  <span style="position:absolute;left:88%;top:18%;width:3px;height:3px;border-radius:50%;background:#fff;animation:ks-twinkle 3.5s 1s infinite"></span>
+  <span style="position:absolute;left:70%;top:8%;width:2px;height:2px;border-radius:50%;background:#fff;animation:ks-twinkle 5s infinite"></span>
+  <span style="position:absolute;left:12%;top:78%;width:2px;height:2px;border-radius:50%;background:#fff;animation:ks-twinkle 4.5s .8s infinite"></span>
+  <span style="position:absolute;left:92%;top:72%;width:3px;height:3px;border-radius:50%;background:#fff;animation:ks-twinkle 3.2s 1.4s infinite"></span>
+  <span style="position:absolute;left:46%;top:6%;width:2px;height:2px;border-radius:50%;background:#fff;animation:ks-twinkle 4s 2s infinite"></span>
+  <div style="position:absolute;left:50%;top:52%;width:420px;height:420px;border:1px solid rgba(148,180,255,.14);border-radius:50%;transform:translate(-50%,-50%)"></div>
+  <div style="position:absolute;left:50%;top:52%;width:640px;height:640px;border:1px dashed rgba(148,180,255,.10);border-radius:50%;transform:translate(-50%,-50%)"></div>
+  <div style="position:absolute;left:24px;top:20px;right:24px;display:flex;justify-content:space-between;align-items:center">
+    <div style="font:800 17px Nunito,sans-serif;color:#E7ECFA;letter-spacing:.5px">Mia's Learning Lab</div>
+    <div style="display:flex;gap:8px">
+      <div style="background:rgba(255,255,255,.07);border:1px solid rgba(148,180,255,.22);border-radius:999px;padding:7px 14px;font:700 12px 'DM Sans',sans-serif;color:#AFC3F5">Level 4 · 1,240 ✦</div>
+      <div style="background:rgba(255,255,255,.07);border:1px solid rgba(148,180,255,.22);border-radius:999px;padding:7px 12px;font:700 12px 'DM Sans',sans-serif;color:#AFC3F5">Grown-ups</div>
+    </div>
+  </div>
+  <div style="position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px">
+    <div style="width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8ED7C6,#2A6F6A);display:flex;align-items:center;justify-content:center;font:800 38px Nunito,sans-serif;color:#fff;animation:ks-glow 4s ease-in-out infinite">M</div>
+    <div style="font:700 13px 'DM Sans',sans-serif;color:#7E90BE">You are here</div>
+  </div>
+  <div style="position:absolute;left:50%;top:52%;transform:translate(calc(-50% - 210px),calc(-50% - 130px));display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer" data-anim="ks-float 5s ease-in-out infinite">
+    <div style="width:84px;height:84px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#7FE6D4,#1E6E63);box-shadow:0 0 28px rgba(94,234,212,.4);display:flex;align-items:center;justify-content:center;font:900 30px Nunito,sans-serif;color:#EAFFF9;animation:ks-float 5s ease-in-out infinite">Aa</div>
+    <div style="font:800 14px Nunito,sans-serif;color:#BFF3E8">Word Workshop</div>
+  </div>
+  <div style="position:absolute;left:50%;top:52%;transform:translate(calc(-50% + 215px),calc(-50% - 145px));display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer" data-anim="ks-float 6s .6s ease-in-out infinite">
+    <div style="width:76px;height:76px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFB48F,#B4552E);box-shadow:0 0 26px rgba(255,158,122,.38);display:flex;align-items:center;justify-content:center;animation:ks-float 6s .6s ease-in-out infinite"><span style="display:grid;grid-template-columns:repeat(2,12px);gap:3px"><span style="width:12px;height:12px;background:#FFE3D2;border-radius:3px"></span><span style="width:12px;height:12px;background:rgba(255,227,210,.5);border-radius:3px"></span><span style="width:12px;height:12px;background:rgba(255,227,210,.5);border-radius:3px"></span><span style="width:12px;height:12px;background:#FFE3D2;border-radius:3px"></span></span></div>
+    <div style="font:800 14px Nunito,sans-serif;color:#FFD8C4">Word Search</div>
+  </div>
+  <div style="position:absolute;left:50%;top:52%;transform:translate(calc(-50% - 300px),calc(-50% + 95px));display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer" data-anim="ks-float 5.5s 1s ease-in-out infinite">
+    <div style="width:72px;height:72px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#C4B2F5,#5A3EB8);box-shadow:0 0 26px rgba(167,139,250,.4);display:flex;align-items:center;justify-content:center;font:800 22px Nunito,sans-serif;color:#F0EAFF;animation:ks-float 5.5s 1s ease-in-out infinite">⌨</div>
+    <div style="font:800 14px Nunito,sans-serif;color:#DCD1FA">Typing Academy</div>
+  </div>
+  <div style="position:absolute;left:50%;top:52%;transform:translate(calc(-50% + 300px),calc(-50% + 80px));display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer" data-anim="ks-float 6.5s .3s ease-in-out infinite">
+    <div style="width:88px;height:88px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFE08A,#B8802B);box-shadow:0 0 30px rgba(255,209,102,.42);display:flex;align-items:center;justify-content:center;font:900 26px Nunito,sans-serif;color:#FFF6DC;animation:ks-float 6.5s .3s ease-in-out infinite">+×</div>
+    <div style="font:800 14px Nunito,sans-serif;color:#FFE9B3">Math Lab</div>
+  </div>
+  <div style="position:absolute;left:50%;top:52%;transform:translate(calc(-50% - 90px),calc(-50% + 215px));display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer" data-anim="ks-float 5.8s 1.4s ease-in-out infinite">
+    <div style="width:78px;height:78px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8FC3F0,#2B5E96);box-shadow:0 0 26px rgba(120,175,235,.4);display:flex;align-items:center;justify-content:center;font:900 24px Nunito,sans-serif;color:#E3F0FF;animation:ks-float 5.8s 1.4s ease-in-out infinite">3×4</div>
+    <div style="font:800 14px Nunito,sans-serif;color:#C2DCF7">Multiplication</div>
+  </div>
+  <div style="position:absolute;left:50%;top:52%;transform:translate(calc(-50% + 130px),calc(-50% + 210px));display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer" data-anim="ks-float 6.2s .9s ease-in-out infinite">
+    <div style="width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#9BE8C5,#2F7D57);box-shadow:0 0 22px rgba(120,220,170,.4);display:flex;align-items:center;justify-content:center;animation:ks-float 6.2s .9s ease-in-out infinite"><span style="width:22px;height:22px;background:#E4FFF0;border-radius:4px;transform:rotate(45deg)"></span></div>
+    <div style="font:800 14px Nunito,sans-serif;color:#C6F2DC">Badges</div>
+  </div>
+  <div style="position:absolute;left:50%;bottom:22px;transform:translateX(-50%);width:420px;display:flex;flex-direction:column;gap:6px;align-items:center">
+    <div style="font:700 12px 'DM Sans',sans-serif;color:#7E90BE">760 ✦ to Level 5</div>
+    <div style="width:100%;height:10px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden"><div style="width:62%;height:100%;border-radius:99px;background:linear-gradient(90deg,#5EEAD4,#A78BFA);box-shadow:0 0 12px rgba(94,234,212,.5)"></div></div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ══════════════ 1c LEARNING PATH ══════════════ -->
+<div class="dv-opt" id="1c">
+<div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Learning Path — one winding trail, today's stop glows</div>
+<div class="dv-card" style="width:980px;background:linear-gradient(180deg,#F6F3EC 0%,#EFEAE0 100%)">
+<div style="padding:26px 36px 34px;display:flex;flex-direction:column;gap:8px">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#B7E4DC,#5FB8AA);display:flex;align-items:center;justify-content:center;font:800 18px Nunito,sans-serif;color:#fff">M</div>
+      <div style="font:800 20px Nunito,sans-serif;color:#2B2A26">Mia's Path</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <div style="background:#fff;border:1px solid #E4DDCE;border-radius:999px;padding:7px 14px;font:800 13px Nunito,sans-serif;color:#2B2A26">Level 4</div>
+      <div style="background:#fff;border:1px solid #E4DDCE;border-radius:999px;padding:7px 14px;font:800 13px Nunito,sans-serif;color:#C98A2D">1,240 ✦</div>
+    </div>
+  </div>
+  <div style="position:relative;height:430px;margin-top:10px">
+    <div style="position:absolute;left:70px;top:118px;width:150px;border-top:3px dashed #D8CFBB;transform:rotate(18deg)"></div>
+    <div style="position:absolute;left:255px;top:132px;width:150px;border-top:3px dashed #D8CFBB;transform:rotate(-16deg)"></div>
+    <div style="position:absolute;left:440px;top:118px;width:150px;border-top:3px dashed #D8CFBB;transform:rotate(18deg)"></div>
+    <div style="position:absolute;left:625px;top:132px;width:150px;border-top:3px dashed #D8CFBB;transform:rotate(-16deg)"></div>
+    <div style="position:absolute;left:20px;top:130px;display:flex;flex-direction:column;align-items:center;gap:8px;width:120px">
+      <div style="width:72px;height:72px;border-radius:50%;background:#E4F2EE;border:3px solid #5FB8AA;display:flex;align-items:center;justify-content:center;font:900 24px Nunito,sans-serif;color:#3E8E80">Aa</div>
+      <div style="font:800 13px Nunito,sans-serif;color:#2B2A26;text-align:center">Word Workshop</div>
+      <div style="display:flex;gap:3px"><span style="width:12px;height:12px;background:#FFD166;border-radius:2px;transform:rotate(45deg)"></span><span style="width:12px;height:12px;background:#FFD166;border-radius:2px;transform:rotate(45deg)"></span><span style="width:12px;height:12px;background:#E7DFCE;border-radius:2px;transform:rotate(45deg)"></span></div>
+    </div>
+    <div style="position:absolute;left:205px;top:62px;display:flex;flex-direction:column;align-items:center;gap:8px;width:120px">
+      <div style="width:72px;height:72px;border-radius:50%;background:#FDEBE0;border:3px solid #E8845E;display:flex;align-items:center;justify-content:center"><span style="display:grid;grid-template-columns:repeat(2,11px);gap:3px"><span style="width:11px;height:11px;background:#E8845E;border-radius:3px"></span><span style="width:11px;height:11px;background:#F2CDB8;border-radius:3px"></span><span style="width:11px;height:11px;background:#F2CDB8;border-radius:3px"></span><span style="width:11px;height:11px;background:#E8845E;border-radius:3px"></span></span></div>
+      <div style="font:800 13px Nunito,sans-serif;color:#2B2A26;text-align:center">Word Search</div>
+      <div style="display:flex;gap:3px"><span style="width:12px;height:12px;background:#FFD166;border-radius:2px;transform:rotate(45deg)"></span><span style="width:12px;height:12px;background:#E7DFCE;border-radius:2px;transform:rotate(45deg)"></span><span style="width:12px;height:12px;background:#E7DFCE;border-radius:2px;transform:rotate(45deg)"></span></div>
+    </div>
+    <div style="position:absolute;left:390px;top:140px;display:flex;flex-direction:column;align-items:center;gap:8px;width:140px">
+      <div style="position:relative">
+        <div style="width:92px;height:92px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFE08A,#E3A94E);border:4px solid #fff;box-shadow:0 0 0 4px #FFD166,0 8px 24px rgba(227,169,78,.45);display:flex;align-items:center;justify-content:center;font:900 30px Nunito,sans-serif;color:#7A5510;animation:ks-float 4s ease-in-out infinite">+×</div>
+        <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#2B2A26;color:#FFD166;font:800 10px Nunito,sans-serif;letter-spacing:1px;padding:4px 10px;border-radius:99px;white-space:nowrap">TODAY</div>
+      </div>
+      <div style="font:800 15px Nunito,sans-serif;color:#2B2A26;text-align:center">Math Lab</div>
+      <div style="background:#2B2A26;color:#fff;font:800 13px Nunito,sans-serif;padding:10px 22px;border-radius:99px;cursor:pointer;box-shadow:0 3px 0 #00000033" style-hover="background:#443F35">Continue ▸</div>
+    </div>
+    <div style="position:absolute;left:595px;top:66px;display:flex;flex-direction:column;align-items:center;gap:8px;width:120px">
+      <div style="width:72px;height:72px;border-radius:50%;background:#E2EEF7;border:3px solid #A9CBE8;display:flex;align-items:center;justify-content:center;font:900 20px Nunito,sans-serif;color:#4F8FC7">3×4</div>
+      <div style="font:800 13px Nunito,sans-serif;color:#2B2A26;text-align:center">Multiplication</div>
+      <div style="font:700 11px 'DM Sans',sans-serif;color:#8A857A">Not started</div>
+    </div>
+    <div style="position:absolute;left:780px;top:140px;display:flex;flex-direction:column;align-items:center;gap:8px;width:120px">
+      <div style="width:72px;height:72px;border-radius:50%;background:#EBE7F8;border:3px solid #C3B6EC;display:flex;align-items:center;justify-content:center;font:800 22px Nunito,sans-serif;color:#8B75D6">⌨</div>
+      <div style="font:800 13px Nunito,sans-serif;color:#2B2A26;text-align:center">Typing Academy</div>
+      <div style="font:700 11px 'DM Sans',sans-serif;color:#8A857A">Not started</div>
+    </div>
+    <div style="position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;gap:14px">
+      <div style="background:#fff;border:1px solid #E4DDCE;border-radius:16px;padding:14px 20px;display:flex;align-items:center;gap:12px;width:300px">
+        <span style="width:34px;height:34px;border-radius:50%;background:#FFD166;box-shadow:0 2px 0 #E3B84E;flex:none"></span>
+        <div><div style="font:800 13px Nunito,sans-serif;color:#2B2A26">Almost a badge!</div><div style="font:500 11.5px 'DM Sans',sans-serif;color:#8A857A">3 more words for "Word Explorer"</div></div>
+      </div>
+      <div style="background:#fff;border:1px solid #E4DDCE;border-radius:16px;padding:14px 20px;display:flex;align-items:center;gap:12px;width:300px">
+        <span style="width:34px;height:34px;border-radius:50%;background:#8ED7C6;box-shadow:0 2px 0 #6FB8A6;flex:none"></span>
+        <div><div style="font:800 13px Nunito,sans-serif;color:#2B2A26">New personal best</div><div style="font:500 11.5px 'DM Sans',sans-serif;color:#8A857A">14 words per minute yesterday</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ══════════════ 1d CONTINUE-FIRST DOCK ══════════════ -->
+<div class="dv-opt" id="1d">
+<div class="dv-olabel"><a class="dv-oid" href="#1d">1d</a>Studio Dock — "continue" hero + quiet dark-glow shelf, app-like dock</div>
+<div class="dv-card" style="width:980px;background:#171D2E">
+<div style="padding:28px 36px 24px;display:flex;flex-direction:column;gap:22px;min-height:600px">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <div style="font:800 22px Nunito,sans-serif;color:#EDF0F9">Hi Mia <span style="font:600 14px 'DM Sans',sans-serif;color:#7E88A8">· let's pick up where you left off</span></div>
+    <div style="display:flex;gap:8px">
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:7px 14px;font:700 12px 'DM Sans',sans-serif;color:#B9C2DC">Level 4</div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:7px 14px;font:700 12px 'DM Sans',sans-serif;color:#FFD166">1,240 ✦</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:18px">
+    <div style="background:linear-gradient(135deg,#1E2A47,#22335B);border:1px solid rgba(120,160,255,.18);border-radius:24px;padding:26px 28px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;box-shadow:0 0 40px rgba(80,120,255,.10) inset" style-hover="border-color:rgba(120,160,255,.4)">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="font:800 11px Nunito,sans-serif;letter-spacing:2px;color:#6FA0E8">CONTINUE</div>
+        <div style="font:800 26px/1.1 Nunito,sans-serif;color:#EDF0F9">Multiplication World</div>
+        <div style="font:500 13px 'DM Sans',sans-serif;color:#8E9AC0">You were building 3 × 4 arrays</div>
+        <div style="margin-top:6px;background:#5EEAD4;color:#0E2B26;font:800 14px Nunito,sans-serif;padding:11px 24px;border-radius:99px;width:fit-content;box-shadow:0 0 20px rgba(94,234,212,.35)" style-hover="background:#7FF4E2">Jump back in ▸</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,22px);gap:5px"><span style="width:22px;height:22px;background:#5EEAD4;border-radius:5px;box-shadow:0 0 10px rgba(94,234,212,.5)"></span><span style="width:22px;height:22px;background:#5EEAD4;border-radius:5px;box-shadow:0 0 10px rgba(94,234,212,.5)"></span><span style="width:22px;height:22px;background:#5EEAD4;border-radius:5px;box-shadow:0 0 10px rgba(94,234,212,.5)"></span><span style="width:22px;height:22px;background:#5EEAD4;border-radius:5px;box-shadow:0 0 10px rgba(94,234,212,.5)"></span><span style="width:22px;height:22px;background:#3FA898;border-radius:5px"></span><span style="width:22px;height:22px;background:#3FA898;border-radius:5px"></span><span style="width:22px;height:22px;background:#3FA898;border-radius:5px"></span><span style="width:22px;height:22px;background:#3FA898;border-radius:5px"></span><span style="width:22px;height:22px;background:#25514B;border-radius:5px"></span><span style="width:22px;height:22px;background:#25514B;border-radius:5px"></span><span style="width:22px;height:22px;background:#25514B;border-radius:5px"></span><span style="width:22px;height:22px;background:#25514B;border-radius:5px"></span></div>
+    </div>
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:24px;padding:22px 24px;display:flex;flex-direction:column;gap:14px">
+      <div style="font:800 13px Nunito,sans-serif;color:#B9C2DC">Today's goals</div>
+      <div style="display:flex;align-items:center;gap:10px"><span style="width:22px;height:22px;border-radius:50%;background:#5EEAD4;flex:none;display:flex;align-items:center;justify-content:center;font:800 12px Nunito,sans-serif;color:#0E2B26">✓</span><span style="font:600 13px 'DM Sans',sans-serif;color:#8E9AC0;text-decoration:line-through">Practice 5 words</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><span style="width:22px;height:22px;border-radius:50%;border:2px solid #4A5578;flex:none"></span><span style="font:600 13px 'DM Sans',sans-serif;color:#D4DAEC">Finish one array puzzle</span></div>
+      <div style="display:flex;align-items:center;gap:10px"><span style="width:22px;height:22px;border-radius:50%;border:2px solid #4A5578;flex:none"></span><span style="font:600 13px 'DM Sans',sans-serif;color:#D4DAEC">Beat your typing best</span></div>
+      <div style="margin-top:auto;height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden"><div style="width:33%;height:100%;background:linear-gradient(90deg,#5EEAD4,#A78BFA)"></div></div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px">
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer" style-hover="border-color:rgba(94,234,212,.5)">
+      <div style="width:52px;height:52px;border-radius:16px;background:rgba(94,234,212,.14);display:flex;align-items:center;justify-content:center;font:900 22px Nunito,sans-serif;color:#5EEAD4">Aa</div>
+      <div style="font:800 13px Nunito,sans-serif;color:#D4DAEC;text-align:center">Word Workshop</div>
+    </div>
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer" style-hover="border-color:rgba(255,158,122,.5)">
+      <div style="width:52px;height:52px;border-radius:16px;background:rgba(255,158,122,.14);display:flex;align-items:center;justify-content:center"><span style="display:grid;grid-template-columns:repeat(2,10px);gap:3px"><span style="width:10px;height:10px;background:#FF9E7A;border-radius:3px"></span><span style="width:10px;height:10px;background:rgba(255,158,122,.4);border-radius:3px"></span><span style="width:10px;height:10px;background:rgba(255,158,122,.4);border-radius:3px"></span><span style="width:10px;height:10px;background:#FF9E7A;border-radius:3px"></span></span></div>
+      <div style="font:800 13px Nunito,sans-serif;color:#D4DAEC;text-align:center">Word Search</div>
+    </div>
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer" style-hover="border-color:rgba(167,139,250,.5)">
+      <div style="width:52px;height:52px;border-radius:16px;background:rgba(167,139,250,.14);display:flex;align-items:center;justify-content:center;font:800 20px Nunito,sans-serif;color:#A78BFA">⌨</div>
+      <div style="font:800 13px Nunito,sans-serif;color:#D4DAEC;text-align:center">Typing Academy</div>
+    </div>
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer" style-hover="border-color:rgba(255,209,102,.5)">
+      <div style="width:52px;height:52px;border-radius:16px;background:rgba(255,209,102,.14);display:flex;align-items:center;justify-content:center;font:900 20px Nunito,sans-serif;color:#FFD166">+×</div>
+      <div style="font:800 13px Nunito,sans-serif;color:#D4DAEC;text-align:center">Math Lab</div>
+    </div>
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer" style-hover="border-color:rgba(120,220,170,.5)">
+      <div style="width:52px;height:52px;border-radius:16px;background:rgba(120,220,170,.14);display:flex;align-items:center;justify-content:center"><span style="width:20px;height:20px;background:#7BDCAA;border-radius:4px;transform:rotate(45deg)"></span></div>
+      <div style="font:800 13px Nunito,sans-serif;color:#D4DAEC;text-align:center">My Badges</div>
+    </div>
+  </div>
+  <div style="margin-top:auto;display:flex;justify-content:center">
+    <div style="display:flex;gap:26px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:12px 30px;backdrop-filter:blur(8px)">
+      <span style="width:40px;height:40px;border-radius:50%;background:#5EEAD4;display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(94,234,212,.4);cursor:pointer"><span style="width:14px;height:14px;background:#0E2B26;border-radius:3px"></span></span>
+      <span style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="width:14px;height:14px;background:#8E9AC0;border-radius:50%"></span></span>
+      <span style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer"><span style="width:14px;height:14px;background:#8E9AC0;border-radius:2px;transform:rotate(45deg)"></span></span>
+      <span style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;font:800 15px Nunito,sans-serif;color:#8E9AC0">M</span>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "build the Word Workshop screen in the style of <a class="dv-oid" href="#1a">1a</a>" · "mix <a class="dv-oid" href="#1d">1d</a>'s continue card into <a class="dv-oid" href="#1a">1a</a>" · "show profile select + Math Lab next"</p>
+</section>
+
+</x-dc>
+</body>
+</html>
