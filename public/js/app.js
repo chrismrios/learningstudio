@@ -213,6 +213,18 @@ const ZONES = [
       <span style="width:12px;height:12px;border-radius:50%;background:#BBDDD3"></span>
       <span style="font:900 16px Nunito,sans-serif;color:#3E8E80;margin-left:4px">a</span></span>`,
     progress: p => (p.counts.wsnakeWords || 0) / 10 },
+  { id: "paint", sect: "Create & Play", cls: "coral", dot: "#E8845E", empty: "var(--coral-dot)", title: "Color Studio", sub: "Paint by numbers — imagine it or snap a photo!",
+    motif: `<span style="display:grid;grid-template-columns:repeat(3,13px);gap:3px">
+      <span style="width:13px;height:13px;background:#E8506B;border-radius:3px"></span>
+      <span style="width:13px;height:13px;background:#fff;border:1px solid #E4DDCE;border-radius:3px"></span>
+      <span style="width:13px;height:13px;background:#FFD166;border-radius:3px"></span>
+      <span style="width:13px;height:13px;background:#fff;border:1px solid #E4DDCE;border-radius:3px"></span>
+      <span style="width:13px;height:13px;background:#5FB8AA;border-radius:3px"></span>
+      <span style="width:13px;height:13px;background:#fff;border:1px solid #E4DDCE;border-radius:3px"></span>
+      <span style="width:13px;height:13px;background:#fff;border:1px solid #E4DDCE;border-radius:3px"></span>
+      <span style="width:13px;height:13px;background:#8B75D6;border-radius:3px"></span>
+      <span style="width:13px;height:13px;background:#fff;border:1px solid #E4DDCE;border-radius:3px"></span></span>`,
+    progress: () => { try { return (JSON.parse(localStorage.getItem("kls_paint_v1"))?.done || 0) / 5; } catch { return 0; } } },
   { id: "style", sect: "Create & Play", cls: "lav", dot: "#8B75D6", empty: "var(--lav-dot)", title: "Style Studio", sub: "Dress up, hit the runway, win the podium!",
     motif: `<span style="display:flex;align-items:flex-end;gap:4px">
       <span style="width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;border-bottom:26px solid #C9A2E8"></span>
@@ -2675,6 +2687,28 @@ routes.snake3d = () => {
   const prev = cleanup;
   cleanup = () => { disposed = true; document.body.style.overflow = ""; if (prev) prev(); };
   app.appendChild(v);
+};
+
+/* ================= COLOR STUDIO (paint by numbers) ================= */
+routes.paint = () => {
+  const p = active();
+  const v = el(`<div></div>`);
+  v.appendChild(topbar("Color Studio"));
+  const holder = el(`<div></div>`);
+  v.appendChild(holder);
+  app.appendChild(v);
+  let disposeFn = null, gone = false;
+  import("./paint.js").then(m => {
+    if (gone) return;
+    disposeFn = m.mountPaint(holder, {
+      el, toast, confetti, speak,
+      addXp: (n, why) => addXp(p, n, why),
+      award: id => award(p, id),
+      soundOn: () => p.settings.sound,
+    });
+  });
+  const prev = cleanup;
+  cleanup = () => { gone = true; if (disposeFn) disposeFn(); if (prev) prev(); };
 };
 
 /* ================= STYLE STUDIO ================= */

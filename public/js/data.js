@@ -152,6 +152,8 @@ export const BADGES = [
   { id: "style-first", icon: "💃", name: "Runway Ready", desc: "Finish your first fashion show", zone: "style" },
   { id: "style-win", icon: "🥇", name: "Style Icon", desc: "Win first place in a fashion show", zone: "style" },
   { id: "style-vip", icon: "🔓", name: "VIP Scholar", desc: "Unlock the VIP rack with your smarts", zone: "style" },
+  { id: "paint-first", icon: "🎨", name: "Little Artist", desc: "Finish your first paint-by-numbers", zone: "paint" },
+  { id: "paint-10", icon: "🖼️", name: "Master Painter", desc: "Finish 10 paint-by-numbers pictures", zone: "paint" },
   { id: "level-5", icon: "🌈", name: "Halfway Hero", desc: "Reach Level 5", zone: "profile" },
   { id: "daily", icon: "📅", name: "Daily Learner", desc: "Play on 3 different days", zone: "profile" },
 ];
